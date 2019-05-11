@@ -39,16 +39,16 @@ void* yalloc(){
 	//ublock->self=start_add;
 	//ablock=NULL;
 	//ablock->size=0;
-	//return ublock;
+	return ublock;
 }
 
 void* ymalloc(long int x){
 	//node *ublock,*ablock,
 	node   *temp,*buff;
-	/*	if(!init){
+	if(!init){
 	ublock=yalloc();
 	init=true;
-	}*/
+	}
 	temp=ublock;
 	//printf("%ld",temp->size);
 	do{
