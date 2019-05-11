@@ -16,7 +16,7 @@
 #include<stdbool.h>
 
 typedef struct memory{
-	long int size;		//keeping the block size required by the user, irrespective of meta data
+	size_t size;		//keeping the block size required by the user, irrespective of meta data
 	struct memory *next;	//  pointing the next memory block in allocated/unallocated list
 }node;	
 
@@ -44,7 +44,9 @@ void* yalloc(){
 
 void* ymalloc(long int x){
 	//node *ublock,*ablock,
-	node   *temp,*buff;
+	node *temp,*buff;
+	buff=NULL;
+	
 	if(!init){
 	ublock=yalloc();
 	init=true;
