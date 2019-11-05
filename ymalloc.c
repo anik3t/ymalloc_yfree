@@ -27,32 +27,29 @@ node *merge(node *head1,node *head2);
 
 node* joinublock(node* ublock);
 //merging the block into a continous memory according to there addresses
-bool init=false;
+//static bool init=false;
 //initializing yalloc once in a program
 
 void* yalloc(){
-	//node *ublock;
-	//start_add=(void*)malloc(SIZE+sizeof(node));
-	ublock=(void*)malloc(SIZE+sizeof(node)); 	//ublock 
+	ublock=(void*)malloc(SIZE+sizeof(node)); 	 
 	ublock->size=SIZE;
 	ublock->next=NULL;
-	//ublock->self=start_add;
-	//ablock=NULL;
-	//ablock->size=0;
 	return ublock;
 }
 
 void* ymalloc(long int x){
 	//node *ublock,*ablock,
 	node *temp,*buff;
+	buff=ublock;
 	buff=NULL;
+	static bool init=false;
 	
 	if(!init){
 	ublock=yalloc();
 	init=true;
 	}
 	temp=ublock;
-	//printf("%ld",temp->size);
+	buff=temp;
 	do{
 		if((temp->size)==x){
 			ablock = temp;
@@ -67,7 +64,6 @@ void* ymalloc(long int x){
 			//worst case checking to keep atleast one block of 1 byte + sizeof(node)
 				if(ablock==NULL){
 					ablock = temp;
-					//printf("%d",ablock->size);		
 					ablock->size = x;
 				}	
 				else{
@@ -77,6 +73,7 @@ void* ymalloc(long int x){
 				ablock->next=NULL;
 				temp = temp+sizeof(node)+x;
 				temp->size = (temp->size) - x - sizeof(node);
+			
 				// meta block of current ublock(temp) is ignored as it is not considered in size and directly allocated to ablock
 				buff->next = temp;
 				temp = buff;
